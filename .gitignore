@@ -1,0 +1,18 @@
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# k8s
+kubeconfig
+# vscode-sops
+.decrypted~*.yaml
+.config.env
+*.agekey
+# Ansible
+# Terraform
+.terraform
+.terraform.tfstate*
+terraform.tfstate*
+node_modules
+package*.json
