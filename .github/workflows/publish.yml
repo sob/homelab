@@ -38,6 +38,8 @@ jobs:
     needs: find-changed-images
     if: ${{ needs.find-changed-images.outputs.apps != '' && toJson(fromJson(needs.find-changed-images.outputs.apps)) != '[]' }}
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     strategy:
       fail-fast: false
       matrix:
