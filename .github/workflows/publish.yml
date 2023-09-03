@@ -23,7 +23,8 @@ jobs:
           base: 'main'
           list-files: json
           filters: |
-            find-changed-images:  - added|deleted|modified: 'containers/*/**'
+            changed:
+              - added|deleted|modified: 'containers/*/**'
 
       - name: Set apps Matrix
         if: ${{ steps.filter.outputs.changed == 'true' }}
