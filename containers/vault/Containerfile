@@ -1,0 +1,22 @@
+FROM registry.fedoraproject.org/fedora:38 as unzip
+
+# From https://developer.hashicorp.com/vault/downloads
+ARG NAME="vault"
+ARG VERSION="1.14.1"
+ARG SHA256="6031432dfc3de07f6523d206c44fc018aa969d94c8e9125a77340af359f57ea3  vault_1.14.1_linux_amd64.zip"
+
+RUN dnf -y install unzip && \
+    dnf clean all
+
+RUN curl -O "https://releases.hashicorp.com/${NAME}/${VERSION}/${NAME}_${VERSION}_linux_amd64.zip"
+RUN echo "${SHA256}" | sha256sum --check
+RUN unzip "${NAME}_${VERSION}_linux_amd64.zip"
+
+FROM scratch
+
+# Keep container image for ~2 months
+LABEL quay.expires-after=8w
+
+COPY --from=unzip /vault .
+
+CMD ["/vault"]
